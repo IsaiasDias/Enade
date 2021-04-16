@@ -122,8 +122,6 @@ nbdist/
 .classpath/
 .project
 nb-configuration.xml
-src/main/webapp
-src/main/resources
 
 ### Sonar ###
 #Sonar generated dir
