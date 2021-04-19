@@ -73,8 +73,14 @@ public class ProvaResource {
     @Produces("application/json; charset=UTF-8")
     @Path("/alterar")
     public String alterar(Prova prova) {
+        Prova p;
         try {
-            Prova p = novaProva(prova);
+            if(prova.getId() == null) {
+                p = novaProva(prova);
+            } else {
+                p = getProva(prova.getId());
+                p.setDataProva(prova.getDataProva());
+            }            
             return ProvaDAO.getInstance().atualizar(p).toString();
         } catch (Exception e) {
             return "Erro ao atualizar um registro! " + e.getMessage();

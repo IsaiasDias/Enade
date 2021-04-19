@@ -73,8 +73,14 @@ public class TipoUsuarioResource {
     @Produces("application/json; charset=UTF-8")
     @Path("/alterar")
     public String alterar(TipoUsuario tipoUsuario) {
+        TipoUsuario tu;
         try {
-        	TipoUsuario tu = novoTipoUsuario(tipoUsuario);
+            if(tipoUsuario.getId() == null){
+                tu = novoTipoUsuario(tipoUsuario);
+            } else {
+                tu = getTipoUsuario(tipoUsuario.getId());
+                tu.setNomeTipoUsuario(tipoUsuario.getNomeTipoUsuario());
+            }        	 
             return TipoUsuarioDAO.getInstance().atualizar(tu).toString();
         } catch (Exception e) {
             return "Erro ao atualizar um registro! " + e.getMessage();

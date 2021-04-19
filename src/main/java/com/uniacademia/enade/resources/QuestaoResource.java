@@ -74,8 +74,22 @@ public class QuestaoResource {
     @Produces("application/json; charset=UTF-8")
     @Path("/alterar")
     public String alterar(Questao questao) {
+        Questao q;
         try {
-            Questao q = novaQuestao(questao);
+            if(questao.getId() == null){
+                q = novaQuestao(questao);
+            } else {
+                q = getQuestao(questao.getId());
+                q.setDescricaoQuestao(questao.getDescricaoQuestao());
+                q.setAlternativaA(questao.getAlternativaA());
+                q.setAlternativaB(questao.getAlternativaB());
+                q.setAlternativaC(questao.getAlternativaC());
+                q.setAlternativaD(questao.getAlternativaD());
+                q.setAlternativaE(questao.getAlternativaE());
+                q.setQuestaoCorreta(questao.getQuestaoCorreta());
+                q.setEstadoQuestao(questao.getEstadoQuestao());
+                q.setTipoQuestaoidTipoQuestao(questao.getTipoQuestaoidTipoQuestao());
+            }            
             return QuestaoDAO.getInstance().atualizar(q).toString();
         } catch (Exception e) {
             return "Erro ao atualizar um registro! " + e.getMessage();

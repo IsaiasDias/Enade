@@ -75,8 +75,16 @@ public class ResultadoResource {
     @Produces("application/json; charset=UTF-8")
     @Path("/alterar")
     public String alterar(Resultado resultado) {
+        Resultado r;
         try {
-        	Resultado r = novoResultado(resultado);
+            if(resultado.getId() == null){
+                r = novoResultado(resultado);
+            } else {
+                r = getResultado(resultado.getId());
+                r.setValorObtido(resultado.getValorObtido());
+                r.setProvaidProva(resultado.getProvaidProva());
+                r.setUsuarioidUsuario(resultado.getUsuarioidUsuario());
+            }        	
             return ResultadoDAO.getInstance().atualizar(r).toString();
         } catch (Exception e) {
             return "Erro ao atualizar um registro! " + e.getMessage();

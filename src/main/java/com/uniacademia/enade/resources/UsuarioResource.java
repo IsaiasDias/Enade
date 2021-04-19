@@ -75,7 +75,17 @@ public class UsuarioResource {
     @Path("/alterar")
     public String alterar(Usuario usuario) {
         try {
-            Usuario u = novoUsuario(usuario);
+            Usuario u;
+            if(usuario.getId() == null){
+                u = novoUsuario(usuario);
+            } else {
+                u = getUsuario(usuario.getId());
+                u.setNome(usuario.getNome());
+                u.setEmail(usuario.getEmail());
+                u.setSenha(usuario.getSenha());
+                u.setResultadoList(usuario.getResultadoList());
+                u.setTipoUsuarioidTipoUsuario(usuario.getTipoUsuarioidTipoUsuario());
+            }            
             return UsuarioDAO.getInstance().atualizar(u).toString();
         } catch (Exception e) {
             return "Erro ao atualizar um registro! " + e.getMessage();

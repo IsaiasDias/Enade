@@ -60,7 +60,7 @@ public class TipoQuestaoResource {
     @Path("/cadastrar")
     public String cadastrar(TipoQuestao tipoQuestao) {
         try {
-        	TipoQuestao tp = novoTipoQuestao(tipoQuestao);
+            TipoQuestao tp = novoTipoQuestao(tipoQuestao);
             TipoQuestaoDAO.getInstance().atualizar(tp);
             return "Registro cadastrado com sucesso!";
         } catch (Exception e) {
@@ -73,8 +73,14 @@ public class TipoQuestaoResource {
     @Produces("application/json; charset=UTF-8")
     @Path("/alterar")
     public String alterar(TipoQuestao tipoQuestao) {
+        TipoQuestao tp;
         try {
-        	TipoQuestao tp = novoTipoQuestao(tipoQuestao);
+            if(tipoQuestao.getId() == null){
+                tp = novoTipoQuestao(tipoQuestao);
+            } else {
+                tp = getTipoQuestao(tipoQuestao.getId());
+                tp.setNomeTipoQuestao(tipoQuestao.getNomeTipoQuestao());
+            }            
             return TipoQuestaoDAO.getInstance().atualizar(tp).toString();
         } catch (Exception e) {
             return "Erro ao atualizar um registro! " + e.getMessage();
