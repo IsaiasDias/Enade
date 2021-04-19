@@ -27,7 +27,7 @@ public class ProvaResource {
     @Produces("application/json; charset=UTF-8")
     @Path("/getProva/{idProva}")
     public Prova getProva(@PathParam("idProva") Integer idProva) {
-        return ProvaDAO.getInstance().buscar(Prova.class, idProva);
+        return idProva == null ? null : ProvaDAO.getInstance().buscar(Prova.class, idProva);
     }
 
     @DELETE

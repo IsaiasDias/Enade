@@ -28,7 +28,7 @@ public class UsuarioResource {
     @Produces("application/json; charset=UTF-8")
     @Path("/getUsuario/{nome}")
     public Usuario getUsuario(@PathParam("nome") Integer id) {
-        return UsuarioDAO.getInstance().buscar(Usuario.class, id);
+        return id == null ? null : UsuarioDAO.getInstance().buscar(Usuario.class, id);
     }
 
     @DELETE

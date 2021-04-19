@@ -27,7 +27,7 @@ public class TipoQuestaoResource {
     @Produces("application/json; charset=UTF-8")
     @Path("/buscar/{idTipoQuestao}")
     public TipoQuestao getTipoQuestao(@PathParam("idTipoQuestao") Integer idTipoQuestao) {
-        return TipoQuestaoDAO.getInstance().buscar(TipoQuestao.class, idTipoQuestao);
+        return idTipoQuestao == null ? null : TipoQuestaoDAO.getInstance().buscar(TipoQuestao.class, idTipoQuestao);
     }
 
     @DELETE

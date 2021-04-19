@@ -29,7 +29,7 @@ public class ResultadoResource {
     @Produces("application/json; charset=UTF-8")
     @Path("/getResultado/{idResultado}")
     public Resultado getResultado(@PathParam("idResultado") Integer idResultado) {
-        return ResultadoDAO.getInstance().buscar(Resultado.class, idResultado);
+        return idResultado == null ? null : ResultadoDAO.getInstance().buscar(Resultado.class, idResultado);
     }
 
     @DELETE
