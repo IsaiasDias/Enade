@@ -12,4 +12,4 @@ jobs:
       script: ./mvnw clean test
 
 notification:
-  email: info@techprimers.com
+  email: isaiasferreiradias@gmail.com
