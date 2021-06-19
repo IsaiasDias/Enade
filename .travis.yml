@@ -4,13 +4,15 @@ jdk:
   - openjdk8
 
 addons:
-  sonarqube:
+  sonarcloud:
+    organization: "isaiasdias"
+    token:
+      secure: SONAR_TOKEN # encrypted value of your token
 
-script:  
-mvn sonar:sonar \
-  -Dsonar.projectKey=enade \
-  -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=423e74a53bf210c27735d92fbda8596c9398b0d8
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent \
+  install sonar:sonar -Dsonar.projectKey=IsaiasDias_Enade
 
 notifications:
   email: isaiasferreiradias@gmail.com
