@@ -5,5 +5,11 @@ jdk:
 
 script: ./mvnw clean install
 
-notifications:
-  email: isaiasferreiradias@gmail.com
+
+jobs:
+  include:
+    - stage: Test
+      script: ./mvnw clean test
+
+notification:
+  email: info@techprimers.com
