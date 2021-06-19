@@ -13,7 +13,7 @@ script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent \
   install sonar:sonar \
   -Dsonar.projectKey=IsaiasDias_Enade \
-  -Dsonar.login=a7b6c8ff3b0977800a57242c7e58bc1a2ac5b4b7 \
+  -Dsonar.login=a7b6c8ff3b0977800a57242c7e58bc1a2ac5b4b7 
 
 notifications:
   email: isaiasferreiradias@gmail.com
