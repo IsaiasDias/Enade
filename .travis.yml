@@ -10,7 +10,7 @@ addons:
       secure: "5ce0ef2d86305d465490948f0bbf8b4410abb203"
 
 script:
-  - sonar-scanner
+  -mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=IsaiasDias_Enade
 
 notifications:
   email: isaiasferreiradias@gmail.com
