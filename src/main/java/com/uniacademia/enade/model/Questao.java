@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.uniacademia.enade.model;
 
 import java.util.List;
@@ -66,7 +61,7 @@ public class Questao implements EntidadeBase {
     @Column(name = "questaoCorreta")
     private Character questaoCorreta;
     @Column(name = "estadoQuestao")
-    private Short estadoQuestao;
+    private boolean estadoQuestao;
     @ManyToMany(mappedBy = "questaoList")
     private List<Prova> provaList;
     @JoinColumn(name = "TipoQuestao_idTipoQuestao", referencedColumnName = "idTipoQuestao")
@@ -150,11 +145,11 @@ public class Questao implements EntidadeBase {
         this.questaoCorreta = questaoCorreta;
     }
 
-    public Short getEstadoQuestao() {
+    public boolean getEstadoQuestao() {
         return estadoQuestao;
     }
 
-    public void setEstadoQuestao(Short estadoQuestao) {
+    public void setEstadoQuestao(boolean estadoQuestao) {
         this.estadoQuestao = estadoQuestao;
     }
 
@@ -189,6 +184,6 @@ public class Questao implements EntidadeBase {
 
     @Override
     public String toString() {
-    	return getClass().getName();
+    	return idQuestao.toString();
     }
 }

@@ -57,6 +57,7 @@ public class Usuario implements EntidadeBase {
     private TipoUsuario tipoUsuarioidTipoUsuario;
 
     public Usuario() {
+        this.tipoUsuarioidTipoUsuario = new TipoUsuario(1,"Aluno");
     }
 
     public Usuario(Integer idUsuario) {

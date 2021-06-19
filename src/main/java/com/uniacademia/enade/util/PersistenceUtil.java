@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.uniacademia.enade.util;
 
 import java.util.logging.Logger;
@@ -14,7 +9,7 @@ import javax.persistence.Persistence;
 import org.eclipse.persistence.sessions.Session;
 
 public class PersistenceUtil {
-
+    
     private static final String PERSISTENCE_UNIT_NAME = "ENADE";
     private static EntityManagerFactory factory;
     private static ThreadLocal<EntityManager> manager = new ThreadLocal<>();

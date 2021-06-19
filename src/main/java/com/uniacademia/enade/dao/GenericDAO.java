@@ -1,19 +1,17 @@
 package com.uniacademia.enade.dao;
 
+import com.uniacademia.enade.model.EntidadeBase;
+import com.uniacademia.enade.util.PersistenceUtil;
 import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
-import com.uniacademia.enade.model.EntidadeBase;
-import com.uniacademia.enade.util.PersistenceUtil;
-
-public abstract class GenericoDAO<T extends EntidadeBase> implements Serializable{
-
-	private static final long serialVersionUID = 7805332224702440775L;
+public abstract class GenericDAO<T extends EntidadeBase> implements Serializable{
+    
+    	private static final long serialVersionUID = 7805332224702440775L;
 	private static final EntityManager em = getEM();
 
     public static EntityManager getEM() {
@@ -74,5 +72,4 @@ public abstract class GenericoDAO<T extends EntidadeBase> implements Serializabl
         em.flush();
         em.getTransaction().commit();
     }
-
 }

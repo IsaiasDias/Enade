@@ -1,39 +1,51 @@
 package com.uniacademia.enade.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-
 import com.uniacademia.enade.dao.QuestaoDAO;
 import com.uniacademia.enade.model.Questao;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 @Named
 @ViewScoped
 public class QuestaoController implements Serializable {
-
-	private static final long serialVersionUID = 8463908859317136455L;
-	private List<Questao> questoes = new ArrayList<>();
-	private QuestaoDAO dao = QuestaoDAO.getInstance();
-
-    public QuestaoController() {
-    	questoes = dao.buscarTodas(Questao.class);
+    
+    private Questao questao;
+    private List<Questao> questoes;
+    
+    public QuestaoController(){
+        questoes = new ArrayList<>();
+        questoes = QuestaoDAO.getInstance().buscarTodas(Questao.class);
+        questao = new Questao();
+    }
+    
+    public void gravar(){
+        QuestaoDAO.getInstance().persistir(questao);
+        questoes = QuestaoDAO.getInstance().buscarTodas(Questao.class);
+        questao = new Questao();
+    }
+    
+    public void remover(){
+        QuestaoDAO.getInstance().remover(Questao.class, questao.getId());
+        questoes = QuestaoDAO.getInstance().buscarTodas(Questao.class);
+        questao = new Questao();
     }
 
-    public void gravar(Questao questao) {
-        dao.atualizar(questao);
-        questoes = dao.buscarTodas(Questao.class);
+    public Questao getQuestao() {
+        return questao;
     }
 
-    public void remover(Questao questao) {
-        dao.remover(Questao.class, questao.getId());
-        questoes = dao.buscarTodas(Questao.class);
+    public void setQuestao(Questao questao) {
+        this.questao = questao;
     }
 
     public List<Questao> getQuestoes() {
         return questoes;
     }
 
+    public void setQuestoes(List<Questao> questoes) {
+        this.questoes = questoes;
+    }    
 }

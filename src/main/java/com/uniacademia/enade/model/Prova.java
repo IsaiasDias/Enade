@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.uniacademia.enade.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 @Entity
@@ -66,6 +63,12 @@ public class Prova  implements EntidadeBase {
         this.dataProva = dataProva;
     }
     
+    public Prova(Integer idProva, Date dataProva, List<Questao> questaoList) {
+        this.idProva = idProva;
+        this.dataProva = dataProva;
+        this.questaoList = questaoList;
+    }
+    
     @Override
     public Integer getId() {
         return idProva;
@@ -83,14 +86,21 @@ public class Prova  implements EntidadeBase {
         this.dataProva = dataProva;
     }
 
+    @XmlTransient
     public List<Questao> getQuestaoList() {
         return questaoList;
+    }
+    
+    public String getDataFormatada() {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return df.format(dataProva);
     }
 
     public void setQuestaoList(List<Questao> questaoList) {
         this.questaoList = questaoList;
     }
 
+    @XmlTransient
     public List<Resultado> getResultadoList() {
         return resultadoList;
     }
