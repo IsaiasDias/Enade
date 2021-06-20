@@ -5,7 +5,6 @@ jdk:
 addons:
   sonarcloud:
     organization: "isaiasdias"
-    secure: SONAR_TOKEN
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=IsaiasDias_Enade -X
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=IsaiasDias_Enade -Dsonar.login=c3b3e3a89022ac5ed1bda7050fc8a53b7a589c56 -X
