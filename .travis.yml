@@ -1,11 +1,14 @@
 language: java
-
+sudo: required
 jdk:
   - openjdk8
-
+install: true
+ 
 addons:
-  sonarqube: true
+  sonarcloud:
+    organization: "isaiasdias"
+    secure: $SONAR_TOKEN
 
 script:
-  - sonar-scanner -D sonar.host.url=http://localhost:9000 \
-    -D sonar.login=423e74a53bf210c27735d92fbda8596c9398b0d8 -X
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+  -- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=IsaiasDias_Enade
