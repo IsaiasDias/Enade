@@ -22,11 +22,8 @@ jobs:
           at: .
       - run:
           name: sonar
-          command: mvn sonar:sonar \
-                    -Dsonar.projectKey=IsaiasDias_Enade \
-                    -Dsonar.host.url=sonarcloud.io \
-                    -Dsonar.login=3cfcb951d3902f4967583dec7934aa4bf8a96536
-
+          command: mvn sonar:sonar
+          
 workflows:
   main:
     jobs:
