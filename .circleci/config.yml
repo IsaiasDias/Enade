@@ -1,34 +1,29 @@
 version: 2.1
 
-jobs:
-  build:
-    docker:
-      - image: 'circleci/openjdk:8-jdk'
+commands:
+  check-code-quality:
+    description: Check Code Quality
+    parameters:
+        sonar_server_url:
+            type: string
+            default: "http://localhost:9000"
+        sonar_login:
+            type: string
+            default: "423e74a53bf210c27735d92fbda8596c9398b0d8"
+        sonar_sources:
+            type: string
+            default: "./"
     steps:
-      - checkout
-      - run:
-          name: build & test
-          command: mvn verify
-      - persist_to_workspace:
-          root: .
-          paths:
-            - target/*
-  sonar:
-    docker:
-      - image: 'circleci/openjdk:11-jdk'
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run:
-          name: sonar
-          command: mvn sonar:sonar
+    - run:
+        name: Install Sonarqube scanner
+        command: |
+            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
+            unzip sonar-scanner-cli-4.2.0.1873.zip
 
-workflows:
-  main:
-    jobs:
-      - build
-      - sonar:
-          context: SonarCloud
-          requires:
-            - build
+    - run:
+        name: Run Sonarscanner
+        command: |
+            export SONAR_SCANNER_OPTS="-Xmx2048m"
+            eval ./sonar-scanner-4.2.0.1873/bin/sonar-scanner -Dsonar.host.url=<< parameters.sonar_server_url >> \
+            -Dsonar.sources=<< parameters.sonar_sources >> \
+            -Dsonar.login=<< parameters.sonar_login >>
