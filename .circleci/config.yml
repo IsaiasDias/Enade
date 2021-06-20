@@ -29,6 +29,6 @@ workflows:
     jobs:
       - build
       - sonar:
-          context: token
+          context: Sonar Cloud
           requires:
             - build
