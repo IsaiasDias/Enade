@@ -2,3 +2,14 @@ language: java
 
 jdk:
   - openjdk8
+
+before_install:
+  - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
+  - unzip sonar-scanner-cli-3.3.0.1492-linux.zip -d /tmp
+
+script:
+  - /tmp/sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner \
+    -Dsonar.projectKey=enade \
+    -Dsonar.sources=. \
+    -Dsonar.host.url=http://localhost:9000 \
+    -Dsonar.login=423e74a53bf210c27735d92fbda8596c9398b0d8
