@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  circlecidevops:
+    build: .
+    container_name: circle-ci-devops
+    ports:
+      - "8080:8080"

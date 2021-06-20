@@ -23,7 +23,7 @@ jobs:
       - run:
           name: sonar
           command: mvn sonar:sonar
-          
+
 workflows:
   main:
     jobs:
