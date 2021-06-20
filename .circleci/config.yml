@@ -14,7 +14,6 @@ jobs:
           paths:
             - target/*
     working_directory: /tmp
-    steps:
       - run:
           name: Creating Dummy Artifacts
           command: |
