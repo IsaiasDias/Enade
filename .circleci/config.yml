@@ -6,22 +6,19 @@ jobs:
       - image: 'circleci/openjdk:8-jdk'
     steps:
       - checkout
+    working_directory: /tmp
       - run:
           name: build & test
           command: mvn verify
-      - persist_to_workspace:
-          root: .
-          paths:
-            - target/*
-  build:
-    working_directory: /tmp
-    steps:
-      - run:
           name: Creating Dummy Artifacts
           command: |
             echo "my artifact file" > /tmp/art-1;
             mkdir /tmp/artifacts;
             echo "my artifact files in a dir" > /tmp/artifacts/art-2;
+      - persist_to_workspace:
+          root: .
+          paths:
+            - target/*
       - store_artifacts:
           path: /tmp/art-1
           destination: artifact-file
