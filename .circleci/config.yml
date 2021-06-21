@@ -22,7 +22,7 @@ jobs:
           at: .
       - run:
           name: sonar
-          command: mvn verify sonar:sonar
+          command: mvn sonar:sonar
 
   build-deploy:
     machine: true
