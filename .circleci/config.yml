@@ -49,5 +49,4 @@ workflows:
     jobs:
       - build-deploy
           requires:
-            -build
-            -sonar
+            - sonar
