@@ -24,6 +24,19 @@ jobs:
           name: sonar
           command: mvn sonar:sonar
 
+  build-deploy:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build and push Docker image to Heroku
+          command: |
+            set -x
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a circle-ci-devops web
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a circle-ci-devops web
+
 workflows:
   main:
     jobs:
@@ -32,3 +45,6 @@ workflows:
           context: SonarCloud
           requires:
             - build
+  build-deploy:
+    jobs:
+      - build-deploy
