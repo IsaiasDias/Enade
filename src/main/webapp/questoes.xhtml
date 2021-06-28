@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="pt-br"
-      xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -24,7 +23,7 @@
                     <p:ajax event="rowEdit" listener="#{questaoController.onRowEdit}" update=":form:msgs" />
                     <p:ajax event="rowEditCancel" listener="#{questaoController.onRowCancel}" update=":form:msgs" />
 
-                    <p:column headerText="Código" sortBy="#{valor.id}" filterBy="#{valor.id}">
+                    <p:column headerText="Código" sortBy="#{valor.idQuestao}" filterBy="#{valor.id}">
                         <h:outputText value="#{valor.id}" />
                     </p:column>
 
@@ -96,17 +95,12 @@
                     </p:column>
 
                     <p:column headerText="Opções" exportable="false">
-                        <center>
-                            <p:commandButton icon="ui-icon-pencil" value="Editar" onclick="PF('record').show();"> 
-                                <f:setPropertyActionListener target="#{questaoController.questao}"
-                                                             value="#{valor}" />
-                            </p:commandButton>
+                        <p:rowEditor id="edit"/>
 
-                            <p:commandButton icon="ui-icon-trash" value="Deletar" onclick="PF('remove').show();"> 
-                                <f:setPropertyActionListener target="#{questaoController.questao}"
-                                                             value="#{valor}" />
-                            </p:commandButton> 
-                        </center>
+                        <p:commandLink value="Deletar" onclick="PF('remove').show();" class="ui-icon ui-icon-trash"> 
+                            <f:setPropertyActionListener target="#{questaoController.questao}"
+                                                         value="#{valor}" />
+                        </p:commandLink> 
                     </p:column>
                 </p:dataTable>
             </h:form>

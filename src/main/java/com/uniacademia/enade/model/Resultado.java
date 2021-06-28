@@ -18,7 +18,8 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
     @NamedQuery(name = "Resultado.buscarTodas", query = "SELECT r FROM Resultado r"),
     @NamedQuery(name = "Resultado.findByIdResultado", query = "SELECT r FROM Resultado r WHERE r.idResultado = :idResultado"),
-    @NamedQuery(name = "Resultado.findByValorObtido", query = "SELECT r FROM Resultado r WHERE r.valorObtido = :valorObtido")})
+    @NamedQuery(name = "Resultado.findByValorObtido", query = "SELECT r FROM Resultado r WHERE r.valorObtido = :valorObtido"),
+    @NamedQuery(name = "Resultado.findByIdUsuario", query = "SELECT r FROM Resultado r WHERE r.usuarioidUsuario.idUsuario = :idUsuario ORDER BY r.provaidProva.dataProva DESC")})
 public class Resultado implements EntidadeBase {
 
     private static final long serialVersionUID = 1L;

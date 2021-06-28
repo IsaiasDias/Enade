@@ -5,22 +5,25 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
     <header>
-        <h1>Simulado ENADE</h1>
-        <h:form>  
+        <div style="display: flex; justify-content: space-between">
+            <h1>Simulado ENADE</h1>
+            <h1>#{loginController.usuarioLogin.tipoUsuarioidTipoUsuario.nomeTipoUsuario}</h1>
+        </div>
+        <h:form >  
             <p:menubar>
                 <p:menuitem value="Início" icon="ui-icon-home" url="index.xhtml" />
-
-                <p:submenu label="Gerenciar" icon="ui-icon-gear">
+                <p:submenu label="Gerenciar" icon="ui-icon-gear" rendered="#{loginController.isProfessor()}">
+                    <p:menuitem value="Tipos de Usuários" icon="ui-icon-person" url="tipoUsuario.xhtml"/>
                     <p:menuitem value="Usuários" icon="ui-icon-person" url="usuarios.xhtml"/>
                     <p:menuitem value="Tipos de Questões" icon="ui-icon-bookmark" url="tipoQuestao.xhtml"/>
                     <p:menuitem value="Questões" icon="ui-icon-folder-open" url="questoes.xhtml"/>
                     <p:menuitem value="Prova" icon="ui-icon-document" url="prova.xhtml"/>
                 </p:submenu>
-                <p:submenu label="Relatórios" icon="ui-icon-print">
-                    <p:menuitem value="Consulta por Usuário" icon="ui-icon-print" url="consultaUsuario.xhtml"/>
-                    <p:menuitem value="Consulta por Prova" icon="ui-icon-print" url="consultaProva.xhtml"/>
-                    <p:menuitem value="Relatório" icon="ui-icon-print" url="relatorio.xhtml"/>
-                </p:submenu>
+                <p:menuitem value="Gráficos" icon="ui-icon-image" url="graficos.xhtml" rendered="#{loginController.isProfessor()}" />
+                <p:menuitem value="Relatórios" icon="ui-icon-print" url="relatorios.xhtml" rendered="#{loginController.isProfessor()}" />
+                <p:menuitem value="Realizar prova" icon="ui-icon-document" url="realizarProva.xhtml" rendered="#{!loginController.isProfessor()}"/>
+                <p:menuitem value="Resultado provas" icon="ui-icon-clipboard" url="resultados.xhtml" rendered="#{!loginController.isProfessor()}"/>
+                <p:menuitem icon="ui-icon-power" value="Sair" action="#{loginController.logout()}"/>
             </p:menubar>
         </h:form>
     </header>

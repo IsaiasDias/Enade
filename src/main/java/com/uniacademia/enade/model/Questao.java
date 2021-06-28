@@ -14,8 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
+import org.eclipse.persistence.oxm.annotations.XmlTransformation;
 
 @Entity
 @Table(name = "Questao")
@@ -29,6 +32,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Questao.findByAlternativaD", query = "SELECT q FROM Questao q WHERE q.alternativaD = :alternativaD"),
     @NamedQuery(name = "Questao.findByAlternativaE", query = "SELECT q FROM Questao q WHERE q.alternativaE = :alternativaE"),
     @NamedQuery(name = "Questao.findByQuestaoCorreta", query = "SELECT q FROM Questao q WHERE q.questaoCorreta = :questaoCorreta"),
+    @NamedQuery(name = "Questao.findByEstadoQuestao", query = "SELECT q FROM Questao q WHERE q.estadoQuestao = :estadoQuestao"),
     @NamedQuery(name = "Questao.findByEstadoQuestao", query = "SELECT q FROM Questao q WHERE q.estadoQuestao = :estadoQuestao")})
 public class Questao implements EntidadeBase {
 
@@ -67,6 +71,8 @@ public class Questao implements EntidadeBase {
     @JoinColumn(name = "TipoQuestao_idTipoQuestao", referencedColumnName = "idTipoQuestao")
     @ManyToOne(optional = false)
     private TipoQuestao tipoQuestaoidTipoQuestao;
+    @Transient
+    private String resposta;
 
     public Questao() {
     }
@@ -153,6 +159,7 @@ public class Questao implements EntidadeBase {
         this.estadoQuestao = estadoQuestao;
     }
 
+    @XmlTransient
     public List<Prova> getProvaList() {
         return provaList;
     }
@@ -167,6 +174,10 @@ public class Questao implements EntidadeBase {
 
     public void setTipoQuestaoidTipoQuestao(TipoQuestao tipoQuestaoidTipoQuestao) {
         this.tipoQuestaoidTipoQuestao = tipoQuestaoidTipoQuestao;
+    }
+    
+    public String getResposta() {
+        return resposta;
     }
 
     @Override

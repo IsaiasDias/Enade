@@ -5,8 +5,12 @@ import com.uniacademia.enade.model.Prova;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.event.RowEditEvent;
 
 @Named
 @ViewScoped
@@ -31,6 +35,19 @@ public class ProvaController implements Serializable{
         ProvaDAO.getInstance().remover(Prova.class, prova.getId());
         provas = ProvaDAO.getInstance().buscarTodas(Prova.class);
         prova = new Prova();
+    }
+    
+    public void onRowEdit(RowEditEvent event) {
+        Prova obj = (Prova) event.getObject();
+        setProva(obj);
+        gravar();
+        FacesMessage msg = new FacesMessage("Editado", obj.toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent<Prova> event) {
+        FacesMessage msg = new FacesMessage("Cancelado", event.getObject().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public Prova getProva() {

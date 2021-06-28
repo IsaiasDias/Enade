@@ -17,15 +17,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "Usuario")
 @NamedQueries({
-    @NamedQuery(name = "Usuario.buscarTodas", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
     @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome"),
     @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
-    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")})
+    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
+    @NamedQuery(name = "Usuario.findByEmailAndSenha", query = "SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha"),
+    @NamedQuery(name = "Usuario.findAllAlunos", query = "SELECT u FROM Usuario u WHERE u.tipoUsuarioidTipoUsuario.idTipoUsuario = 1")})
 public class Usuario implements EntidadeBase {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +42,6 @@ public class Usuario implements EntidadeBase {
     @Size(min = 1, max = 45)
     @Column(name = "nome")
     private String nome;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -57,7 +59,7 @@ public class Usuario implements EntidadeBase {
     private TipoUsuario tipoUsuarioidTipoUsuario;
 
     public Usuario() {
-        this.tipoUsuarioidTipoUsuario = new TipoUsuario(1,"Aluno");
+        
     }
 
     public Usuario(Integer idUsuario) {
@@ -104,6 +106,7 @@ public class Usuario implements EntidadeBase {
         this.senha = senha;
     }
 
+    @XmlTransient
     public List<Resultado> getResultadoList() {
         return resultadoList;
     }

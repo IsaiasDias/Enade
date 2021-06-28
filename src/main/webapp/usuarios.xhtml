@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="pt-br"
-      xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -54,17 +53,17 @@
                     </p:column>
 
                     <p:column headerText="Opções" exportable="false">
-                        <center>
-                            <p:commandButton icon="ui-icon-pencil" value="Editar" onclick="PF('record').show();"> 
-                                <f:setPropertyActionListener target="#{usuarioController.usuario}"
-                                                             value="#{valor}" />
-                            </p:commandButton>
+                        <p:rowEditor id="edit"/>
 
-                            <p:commandButton icon="ui-icon-trash" value="Deletar" onclick="PF('remove').show();"> 
-                                <f:setPropertyActionListener target="#{usuarioController.usuario}"
-                                                             value="#{valor}" />
-                            </p:commandButton> 
-                        </center>
+                        <p:commandLink value="Deletar" onclick="PF('remove').show();" class="ui-icon ui-icon-trash"> 
+                            <f:setPropertyActionListener target="#{usuarioController.usuario}"
+                                                         value="#{valor}" />
+                        </p:commandLink> 
+
+                        <p:commandLink value="Alterar senha" onclick="PF('changePassword').show();" class="ui-icon ui-icon-key"> 
+                            <f:setPropertyActionListener target="#{usuarioController.usuario}"
+                                                         value="#{valor}" />
+                        </p:commandLink> 
                     </p:column>
                 </p:dataTable>
             </h:form>
@@ -112,13 +111,50 @@
                         Nome:
                         <p:inputText value="#{usuarioController.usuario.nome}" />
                         E-mail:
-                        <p:inputText value="#{usuarioController.usuario.email}" />
+                        <p:inputText type="email" value="#{usuarioController.usuario.email}" required="true" />
                         Senha:
-                        <p:password value="#{usuarioController.usuario.senha}" />
+                        <p:password 
+                            value="#{usuarioController.usuario.senha}" 
+                            feedback="true"
+                            promptLabel="Digite uma senha" 
+                            weakLabel="Fraca"
+                            goodLabel="Boa" 
+                            strongLabel="Forte"
+                            />
                     </p:panelGrid>
                     <br/>
                     <p:commandButton value="Salvar"  
                                      actionListener="#{usuarioController.gravar}" onclick="record.hide()" alt="Record"/> 
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Alterar senha" widgetVar="changePassword" modal="true">
+                <h:form>
+                    <p:panelGrid id="panelRecord" columns="2">
+                        Senha
+                        <p:password 
+                            value="#{usuarioController.senha1}" 
+                            feedback="true"
+                            promptLabel="Digite uma senha" 
+                            weakLabel="Fraca"
+                            goodLabel="Boa" 
+                            strongLabel="Forte"
+                            redisplay="true" 
+                            />
+                        Repetir senha
+                        <p:password 
+                            value="#{usuarioController.senha2}" 
+                            feedback="true" 
+                            promptLabel="Digite uma senha" 
+                            weakLabel="Fraca"
+                            goodLabel="Boa" 
+                            strongLabel="Forte"
+                            redisplay="true" 
+                            />
+                    </p:panelGrid>
+                    <br/>
+                    <p:commandButton value="Salvar"  
+                                     actionListener="#{usuarioController.atualizarSenha}" onclick="changePassword.hide()" alt="Record"/> 
                 </h:form>
             </p:dialog>
 

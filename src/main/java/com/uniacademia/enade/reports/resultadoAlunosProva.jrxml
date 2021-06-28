@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resultadoAlunosProva" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6115f42c-c4d8-474a-ba74-b7aa9f2bea6c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<queryString language="SQL">
+		<![CDATA[select u.nome, r.valorObtido from enade.`Resultado` r inner join enade.`Usuario` u on r.Usuario_idUsuario = u.idUsuario order by u.nome]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorObtido" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="valorObtido"/>
+		<property name="com.jaspersoft.studio.field.label" value="valorObtido"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="resultado"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="427" y="0" width="28" height="15" uuid="bac4bf9d-daa4-4357-b952-c5ee30189532">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="0" width="100" height="15" uuid="e73b44ef-e20e-4bec-b0ee-8bfeb095fe10">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="427" y="15" width="28" height="15" uuid="1df09685-08a3-489e-8382-7f6db5b6937c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField pattern="HH:mm">
+				<reportElement x="455" y="15" width="100" height="15" uuid="3c91fb57-de48-42d2-b567-4324937fb463">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="80" y="0" width="347" height="70" uuid="72b90b4f-6a67-4112-8596-78a85041720d"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Relatório de Notas]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="80" height="70" uuid="6f3755de-2cfb-41cb-a9a8-3ae71700b2ff"/>
+				<imageExpression><![CDATA["E:/Faculdade/9º período/Laboratório de Programação de Web Sites Dinâmicos/Enade/src/main/webapp/resources/imagens/logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="380" height="30" uuid="1700566e-2066-4fec-bd44-0c44e3f437a3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2ce47d2a-de84-439d-bec1-a0f937449056"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="175" height="30" uuid="75ff3020-099e-4033-81c3-f0951d904d74">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf7e2ad2-ab2d-4fe2-8686-f447bf3f98d0"/>
+				</reportElement>
+				<text><![CDATA[Nota]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="0" y="0" width="380" height="30" uuid="207c54a3-cb45-4f5c-a5e6-eee3cbeaa878">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2ce47d2a-de84-439d-bec1-a0f937449056"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="175" height="30" uuid="afd36c7d-3918-460c-9c0b-120d37b35bef">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf7e2ad2-ab2d-4fe2-8686-f447bf3f98d0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{valorObtido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="355" y="0" width="100" height="30" uuid="a0d0822e-a0ca-477b-ab1f-53837d5ecc0d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="455" y="0" width="100" height="30" uuid="ece73000-7b47-4fad-b9f2-d04f3d91d4b3"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="240" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="0" width="555" height="200" uuid="43753901-44ac-4736-93d4-ac77a66168b1"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{valorObtido}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{nome}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{valorObtido}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

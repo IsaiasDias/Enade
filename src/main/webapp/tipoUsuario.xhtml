@@ -11,38 +11,26 @@
                     xmlns:f="http://xmlns.jcp.org/jsf/core">
         <ui:define name="content">
             <br/>
-            <h2>Provas</h2>
+            <h2>Tipo Usuário</h2>
             <br/>
             <h:form id="form">
                 <p:growl id="msgs" showDetail="true"/>
-                <p:dataTable var="valor" value="#{provaController.provas}"
+                <p:dataTable var="valor" value="#{tipoUsuarioController.tipoUsuarios}"
                              id="tabela" emptyMessage="Nenhum registro encontrado"
                              paginatorTemplate="{RowsPerPageDropdown} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                              paginator="true" rows="10" rowsPerPageTemplate="5,10,25,50,100,9999" editable="true">
 
-                    <p:ajax event="rowEdit" listener="#{provaController.onRowEdit}" update=":form:msgs" />
-                    <p:ajax event="rowEditCancel" listener="#{provaController.onRowCancel}" update=":form:msgs" />
+                    <p:ajax event="rowEdit" listener="#{tipoUsuarioController.onRowEdit}" update=":form:msgs" />
+                    <p:ajax event="rowEditCancel" listener="#{tipoUsuarioController.onRowCancel}" update=":form:msgs" />
 
                     <p:column headerText="Código" sortBy="#{valor.id}" filterBy="#{valor.id}">
                         <h:outputText value="#{valor.id}" />
                     </p:column>
 
-                    <p:column headerText="Data" sortBy="#{valor.dataFormatada}" filterBy="#{valor.dataFormatada}">
+                    <p:column headerText="Tipo" sortBy="#{valor.nomeTipoUsuario}" filterBy="#{valor.nomeTipoUsuario}">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{valor.dataFormatada}" /></f:facet>
-                            <f:facet name="input"><p:datePicker value="#{valor.dataProva}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Questões" sortBy="#{valor.questaoList}" filterBy="#{valor.questaoList}">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{valor.questaoList}" /></f:facet>
-                            <f:facet name="input">
-                                <p:selectCheckboxMenu id="multiple" value="#{valor.questaoList}" label="Questões" style="width:100%"
-                                                      multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250">
-                                    <f:selectItems value="#{questaoController.questoesAtivas}"/>
-                                </p:selectCheckboxMenu>
-                            </f:facet>
+                            <f:facet name="output"><h:outputText value="#{valor.nomeTipoUsuario}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{valor.nomeTipoUsuario}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
 
@@ -50,7 +38,7 @@
                         <p:rowEditor id="edit"/>
 
                         <p:commandLink value="Deletar" onclick="PF('remove').show();" class="ui-icon ui-icon-trash"> 
-                            <f:setPropertyActionListener target="#{provaController.prova}"
+                            <f:setPropertyActionListener target="#{tipoUsuarioController.tipoUsuario}"
                                                          value="#{valor}" />
                         </p:commandLink> 
                     </p:column>
@@ -62,7 +50,7 @@
             <h:form>
                 <p:commandButton icon="ui-icon-plus" value="Novo" onclick="PF('record').show();" />  
             </h:form>
-            
+
             <h:form>
                 <div align="center">
                     <h3>Exportar dados da página</h3>
@@ -96,18 +84,13 @@
 
             <p:dialog header="Novo" widgetVar="record" modal="true">
                 <h:form>
-                    <p:panelGrid id="panelRecord" columns="2">
-                        Data:
-                        <p:datePicker value="#{provaController.prova.dataProva}" style="width: 100%" />
-                        Questões:
-                        <p:selectCheckboxMenu id="multiple" value="#{provaController.prova.questaoList}" label="Questões" style="width: 99%"
-                                              multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250">
-                            <f:selectItems value="#{questaoController.questoesAtivas}"/>
-                        </p:selectCheckboxMenu>
+                    <p:panelGrid id="panelRecord" columns="2"> 
+                        Tipo
+                        <p:inputText value="#{tipoUsuarioController.tipoUsuario.nomeTipoUsuario}" />
                     </p:panelGrid>
                     <br/>
                     <p:commandButton value="Salvar"  
-                                     actionListener="#{provaController.gravar}" onclick="record.hide()" alt="Record"/> 
+                                     actionListener="#{tipoUsuarioController.gravar}" onclick="record.hide()" alt="Record"/> 
                 </h:form>
             </p:dialog>
 
@@ -115,7 +98,7 @@
                 <h:form>
                     Você tem certeza?
                     <p:commandButton value="Deletar"  
-                                     actionListener="#{provaController.remover}" onclick="remove.hide()" alt="Delete" /> 
+                                     actionListener="#{tipoUsuarioController.remover}" onclick="remove.hide()" alt="Delete" /> 
                 </h:form>
             </p:dialog>
         </ui:define>

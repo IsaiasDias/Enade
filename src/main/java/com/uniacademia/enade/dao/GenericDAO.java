@@ -12,7 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 public abstract class GenericDAO<T extends EntidadeBase> implements Serializable{
     
     	private static final long serialVersionUID = 7805332224702440775L;
-	private static final EntityManager em = getEM();
+	static final EntityManager em = getEM();
 
     public static EntityManager getEM() {
         return PersistenceUtil.getEntityManager();
@@ -71,5 +71,15 @@ public abstract class GenericDAO<T extends EntidadeBase> implements Serializable
         query.executeUpdate();
         em.flush();
         em.getTransaction().commit();
+    }
+    
+    public Object findSingleResult(Query query) {
+        Object result;
+        try {
+            result = query.setMaxResults(1).getSingleResult();
+        } catch (Exception ex) {
+            result = null;
+        }
+        return result;
     }
 }

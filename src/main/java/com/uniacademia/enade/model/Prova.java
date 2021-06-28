@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "Prova")
@@ -84,6 +85,7 @@ public class Prova  implements EntidadeBase {
         this.dataProva = dataProva;
     }
 
+    @XmlTransient
     public List<Questao> getQuestaoList() {
         return questaoList;
     }
@@ -97,6 +99,7 @@ public class Prova  implements EntidadeBase {
         this.questaoList = questaoList;
     }
 
+    @XmlTransient
     public List<Resultado> getResultadoList() {
         return resultadoList;
     }

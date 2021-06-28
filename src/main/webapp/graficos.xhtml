@@ -3,8 +3,12 @@
                 xmlns:p="http://primefaces.org/ui">
     <ui:define name="content">
         <center>
-            <h1>Olá #{loginController.usuarioLogin.nome}! Bem-vindo ao sistema do Simulado ENADE</h1>
-            <p:graphicImage name="imagens/logo.png" width="30%"/>
+            <br />
+            <p:chart type="pie" model="#{graficoController.pieModel}" style="height:300px"/>
+            <br />
+            <br />
+            <p:chart type="bar" model="#{graficoController.barModel}" style="height:300px"/>
+            <br />
         </center>
     </ui:define>
 </ui:composition>
