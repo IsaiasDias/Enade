@@ -20,7 +20,6 @@ public class ProvaController implements Serializable{
     private List<Prova> provas;
     
     public ProvaController(){
-        provas = new ArrayList<>();
         provas = ProvaDAO.getInstance().buscarTodas(Prova.class);
         prova = new Prova();
     }

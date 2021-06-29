@@ -32,7 +32,6 @@ import org.eclipse.persistence.oxm.annotations.XmlTransformation;
     @NamedQuery(name = "Questao.findByAlternativaD", query = "SELECT q FROM Questao q WHERE q.alternativaD = :alternativaD"),
     @NamedQuery(name = "Questao.findByAlternativaE", query = "SELECT q FROM Questao q WHERE q.alternativaE = :alternativaE"),
     @NamedQuery(name = "Questao.findByQuestaoCorreta", query = "SELECT q FROM Questao q WHERE q.questaoCorreta = :questaoCorreta"),
-    @NamedQuery(name = "Questao.findByEstadoQuestao", query = "SELECT q FROM Questao q WHERE q.estadoQuestao = :estadoQuestao"),
     @NamedQuery(name = "Questao.findByEstadoQuestao", query = "SELECT q FROM Questao q WHERE q.estadoQuestao = :estadoQuestao")})
 public class Questao implements EntidadeBase {
 
@@ -178,6 +177,10 @@ public class Questao implements EntidadeBase {
     
     public String getResposta() {
         return resposta;
+    }
+
+    public void setResposta(String resposta) {
+        this.resposta = resposta;
     }
 
     @Override
